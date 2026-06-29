@@ -19,6 +19,22 @@ export class Logger {
     return new Date().toLocaleString('en-US', { hour12: true });
   }
 
+  private formatMessages(messages: unknown[]): string {
+    return messages
+      .map((message) => {
+        if (typeof message === 'string') {
+          return message;
+        }
+
+        try {
+          return JSON.stringify(message, null, 2);
+        } catch {
+          return String(message);
+        }
+      })
+      .join(' ');
+  }
+
   // 核心打印逻辑
   private print(level: string, message: string, color: string) {
     const pid = process.pid;
@@ -34,12 +50,12 @@ export class Logger {
     console.log(`${prefix} ${timeStr}     ${levelStr} ${contextStr} ${msgStr}`);
   }
 
-  log(message: string) {
-    this.print('LOG', message, colors.green);
+  log(...messages: unknown[]) {
+    this.print('LOG', this.formatMessages(messages), colors.green);
   }
 
-  warn(message: string) {
-    this.print('WARN', message, colors.yellow);
+  warn(...messages: unknown[]) {
+    this.print('WARN', this.formatMessages(messages), colors.yellow);
   }
 
   error(message: string, trace?: string) {
@@ -49,7 +65,7 @@ export class Logger {
     }
   }
 
-  debug(message: string) {
-    this.print('DEBUG', message, colors.cyan);
+  debug(...messages: unknown[]) {
+    this.print('DEBUG', this.formatMessages(messages), colors.cyan);
   }
 }
