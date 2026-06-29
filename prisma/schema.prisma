@@ -45,3 +45,25 @@ model User {
   @@index([plan, planEndTime], map: "user_plan_time_idx")
   @@map("users")
 }
+
+model Channels {
+  id Int @id @default(autoincrement())
+  name String? @db.VarChar(30)
+  baseUrl String @db.VarChar(255)
+  key String @db.VarChar(255)
+
+  models Models[]
+
+  @@map("channels")
+}
+
+model Models {
+  id Int @id @default(autoincrement())
+  channelId Int @map("channel_id")
+  name String? @db.VarChar(30)
+  modelName String @db.VarChar(30) @map("model_name")
+
+  channel Channels @relation(fields: [channelId], references: [id])
+
+  @@map("models")
+}

@@ -17,4 +17,4 @@ export default {
 }
 
 appLogger.log('Application started successfully')
-console.log(`Server is running at http://localhost:${port}`)
+appLogger.log(`Server is running at http://localhost:${port}`)
