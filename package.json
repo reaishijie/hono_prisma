@@ -12,15 +12,20 @@
     "db:migrate:deploy": "bunx --bun prisma migrate deploy"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.0.0",
-    "@prisma/client": "^7.0.0",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
     "@hono/zod-validator": "^0.7.6",
-    "hono": "^4.12.8",
-    "pg": "^8.16.3",
-    "zod": "^4.3.6"
+    "hono": "^4.13.10",
+    "pg": "^8.23.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "prisma": "^7.0.0"
+    "prisma": "^7.10.0"
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.2",
+    "fast-uri": "3.1.6",
+    "mysql2": "3.24.4"
   }
 }
